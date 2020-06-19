@@ -1,4 +1,11 @@
 1. Create canvas context
 2. Create and draw ball/ paddle
 3. Create the bricks
-4. 
+4. Draw scored
+6. Add update() - Animate - requestAnimationFrame(cb)
+7. Move paddle
+8. Keyboard event handlers to move paddle
+9. Move ball
+10. Add wall boundaries
+11. Increase score when bricks break
+12. Lose - redrwar bricks, reset score
