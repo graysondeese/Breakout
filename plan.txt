@@ -1,9 +1,0 @@
-Create the bricks
-Draw scored
-Add update() - Animate - requestAnimationFrame(cb)
-Move paddle
-Keyboard event handlers to move paddle
-Move ball
- Add wall boundaries
-Increase score when bricks break
-Lose - redrwar bricks, reset score

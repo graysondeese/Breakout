@@ -73,10 +73,68 @@ for(let i = 0; i < brickRowCount; i++) {
         bricks[i][j] = { x, y, ...brickInfo }
     }
 }
+// Drawing bricks
+function drawBricks() {
+  bricks.forEach(column => {
+    column.forEach(brick => {
+      ctx.beginPath();
+      ctx.rect(brick.x, brick.y, brick.w, brick.h);
+      ctx.fillStyle = brick.visible ? '#0095dd' : 'transparent';
+      ctx.fill();
+      ctx.closePath();
+    })
+  })
+}
+// Moving paddle
+function movePaddle() {
+  paddle.x += paddle.dx;
+
+  // Stopping paddle @ walls
+  if(paddle.x + paddle.w > canvas.width) {
+    paddle.x = canvas.width - paddle.w;
+  }
+
+  if(paddle.x < 0) {
+    paddle.x = 0;
+  }
+}
+
 // Drawing everything
 function draw() {
+  // clearing canvas
+    ctx.clearRect(0,0, canvas.width, canvas.height);
     drawBall();
     drawPaddle();
     drawScore();
+    drawBricks();
 }
-draw();
+
+// Updating canvas
+function update() {
+  movePaddle();
+  // Drawing everything
+  draw();
+  requestAnimationFrame(update);
+}
+update();
+
+// Keydown 
+function keyDown(e) {
+  // moving key right on right key
+if(e.key === 'Right' || e.key === 'ArrowRight') {
+  paddle.dx = paddle.speed;
+  // moving key left on left key
+} else if (e.key === 'Left' || e.key === 'ArrowLeft') {
+  paddle.dx = -paddle.speed;
+}
+}
+// Keyup
+function keyUp(e) {
+if(e.key === 'Right' || e.key === 'ArrowRight' || e.key === 'Left' || e.key === 'ArrowLeft') {
+  paddle.dx = 0
+}
+}
+
+// Keyboard events
+document.addEventListener('keydown', keyDown)
+document.addEventListener('keyup', keyUp)
