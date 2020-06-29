@@ -132,9 +132,33 @@ function moveBall() {
           ) {
             ball.dy *= -1;
             brick.visible = false;
+
+            increaseScore();
           }
       }
     })
+  })
+
+  // Losing if bottom is hit
+  if(ball.y + ball.size > canvas.height) {
+    showAllBricks();
+    score = 0;
+  }
+}
+
+// Increasing the score
+function increaseScore () {
+  score++;
+
+  if (score % (brickRowCount * brickRowCount) === 0) {
+    showAllBricks();
+  }
+}
+
+// Make bricks appear
+function showAllBricks () {
+  bricks.forEach(column => {
+    column.forEach(brick => (brick.visible = true));
   })
 }
 // Drawing everything
